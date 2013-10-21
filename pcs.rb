@@ -27,7 +27,9 @@ class Baidu_PCS
   end
 
   def make_query_string(method,path)
-    return "#{@pcs_url_prefix}?method=#{method}&path=#{URI.escape(path)}&access_token=#{@access_token}"
+    #return "#{@pcs_url_prefix}?method=#{method}&path=#{URI.escape(path)}&access_token=#{@access_token}"
+    # URI.escape can't process speical symbol in url, like &, look at here http://stackoverflow.com/questions/14989581/ruby-1-9-3-add-unsafe-characters-to-uri-escape
+    return "#{@pcs_url_prefix}?method=#{method}&path=#{CGI.escape(path)}&access_token=#{@access_token}"
   end
 
   # using device_code auth
